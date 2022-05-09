@@ -3,27 +3,29 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <audioManager.h>
+#include <fmodManager.h>
 
 class Game
 {
     public:
         Game();
         ~Game();
-        bool Load();
         void Loop();
 
     private:
 
         SDL_Window *window = nullptr;
-        AudioManager* audioMan = nullptr;
         SDL_Renderer* renderer = nullptr;
         SDL_Event event;
-        int windowWidth = 640;
-        int windowHeight = 480;
+        FmodManager* fmodMan = nullptr;
+
+        bool running = true;
+        Uint64 lastUpdate = SDL_GetPerformanceCounter();
+        Uint64 currentUpdate = SDL_GetPerformanceCounter();
+        double dt = currentUpdate - lastUpdate / (float)SDL_GetPerformanceFrequency();
+
         bool GetEvent();
-        void Update(float dt);
+        void Update(double dt);
         void Draw();
 };
 

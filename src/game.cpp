@@ -1,43 +1,50 @@
 #include <game.h>
 
-
 Game::Game()
 {
-
+    //Initialize SDL
     SDL_Init(SDL_INIT_EVERYTHING);
-
     window = SDL_CreateWindow(
         "SDL_FMOD",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
-        windowWidth,
-        windowHeight,
+        640,
+        480,
         SDL_WINDOW_SHOWN
     );
-
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    audioMan = AudioManager::GetInstance();
+
+    //Initialize Fmod
+    fmodMan = FmodManager::GetInstance();
 }
 
 Game::~Game()
 {
+    //Release SDL
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    SDL_Quit();
+    //Relase Fmod
+    delete fmodMan;
 }
 
 
 void Game::Loop()
 {
-    bool running = true;
-    Uint64 lastUpdate = SDL_GetPerformanceCounter();
     while(running)
     {
-        Uint64 currentUpdate = SDL_GetPerformanceCounter();
-        float dt = (currentUpdate - lastUpdate) / 1000000000.0f;
+        //Get FPS
+        currentUpdate = SDL_GetPerformanceCounter();
+
+        //Get Input
         running = GetEvent();
+
         Update(dt);
         Draw();
-        lastUpdate = currentUpdate;
+
+        //Set FPS
+        lastUpdate = SDL_GetPerformanceCounter();
+        dt =  currentUpdate - lastUpdate / (float)SDL_GetPerformanceFrequency();
     }
 }
 
@@ -53,9 +60,9 @@ bool Game::GetEvent()
     return true;
 }
 
-void Game::Update(float dt)
+void Game::Update(double dt)
 {
-    audioMan->Update();
+    fmodMan->Update();
 }
 
 void Game::Draw()
