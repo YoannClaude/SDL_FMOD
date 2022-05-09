@@ -3,7 +3,7 @@
 static FmodManager* fmodManager;
 
 /*
-                                                                                                        SYSTEM
+                                                                       SYSTEM
 */
 
 FmodManager::FmodManager()
@@ -62,7 +62,7 @@ void FmodManager::SetListenerNumber(int _number)
 }
 
 /*
-                                                                                                    BANKS
+                                                                      BANKS
 */
 
 void FmodManager::LoadBank(std::string _path, const char* _bankName)
@@ -82,7 +82,7 @@ void FmodManager::LoadBank(std::string _path, const char* _bankName)
 }
 
 /*
-                                                                                                    BUSES
+                                                                      BUSES
 */
 
 void FmodManager::LoadBus(std::string _path, const char* _busName)
@@ -178,7 +178,7 @@ void FmodManager::SetBusMute(const char* _busName, bool _mute)
 }
 
 /*
-                                                                                                    VCAs
+                                                                      VCAs
 */
 
 void FmodManager::LoadVCA(std::string _path, const char* _vcaName)
@@ -239,7 +239,7 @@ void FmodManager::SetVCAVolume(const char* _vcaName, float _volume)
 }
 
 /*
-                                                                                                    EVENTS
+                                                                      EVENTS
 */
 
 void FmodManager::LoadEvent(std::string _path, const char* _eventName)
@@ -437,8 +437,9 @@ bool FmodManager::GetEventPaused(const char* _eventName)
 
 
 /*
-                                                                                                    3D
+                                                            	3D ATTRIBUTES
 */
+
 void FmodManager::SetListener3DAttributes(int _listener, FMOD_3D_ATTRIBUTES* _attributes, FMOD_VECTOR* _attenuationPosition)
 {
     auto _result = studioSystem->setListenerAttributes(_listener, _attributes, _attenuationPosition);
@@ -495,7 +496,7 @@ FMOD_3D_ATTRIBUTES FmodManager::GetEvent3DAttributes(const char* _eventName)
 }
 
 /*
-                                                                                                    PARAMETERS
+                                                                 PARAMETERS
 */
 
 float FmodManager::GetGlobalParameter(const char* _parameterName, bool _final)
