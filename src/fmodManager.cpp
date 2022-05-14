@@ -1,6 +1,6 @@
 #include <fmodManager.h>
 
-static FmodManager* fmodManager;
+static FmodManager* fmodManager = nullptr;
 
 /*
                                                                        SYSTEM

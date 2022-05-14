@@ -12,7 +12,6 @@ class FmodManager
 
     public:
 
-        FmodManager();
         ~FmodManager();
         static FmodManager* GetInstance();
         void Update();
@@ -53,6 +52,7 @@ class FmodManager
 
     private:
 
+        FmodManager();
         FMOD::Studio::System* studioSystem = nullptr;
 
         std::unordered_map<const char*, FMOD::Studio::Bank*> bankList;
